@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 class Product extends Component {
   state = {
-    quantity: 11,
+    quantity: this.props.product.quantity,
   };
 
   handleIncrement = () => {
@@ -14,22 +14,16 @@ class Product extends Component {
       <div className="m-2">
         <span className={this.getBadgeClasses()}>{this.formatQuantity()}</span>
         <button onClick={this.handleIncrement} className="btn btn-primary">
-          Increment
+          +
+        </button>
+        <button
+          onClick={() => this.props.onDelete(this.props.product.id)}
+          className="btn btn-danger ms-2"
+        >
+          X
         </button>
       </div>
     );
-  }
-
-  renderTags() {
-    if (this.state.quantity > 10)
-      return (
-        <ul>
-          {this.state.tags.map((tag) => (
-            <li key={tag}>{tag}</li>
-          ))}
-        </ul>
-      );
-    return <p>The quantity is below 10</p>;
   }
 
   getBadgeClasses() {
