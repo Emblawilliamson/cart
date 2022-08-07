@@ -4,8 +4,7 @@ import Products from "./components/Products";
 class App extends Component {
   render() {
     return (
-      <div>
-        <p>Hej mitt namn är Embla</p>
+      <div className="m-4">
         <Products />
       </div>
     );

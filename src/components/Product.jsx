@@ -1,19 +1,14 @@
 import React, { Component } from "react";
 
 class Product extends Component {
-  state = {
-    quantity: this.props.product.quantity,
-  };
-
-  handleIncrement = () => {
-    this.setState({ quantity: this.state.quantity + 1 });
-  };
-
   render() {
     return (
       <div className="m-2">
         <span className={this.getBadgeClasses()}>{this.formatQuantity()}</span>
-        <button onClick={this.handleIncrement} className="btn btn-primary">
+        <button
+          onClick={() => this.props.onIncrement(this.props.product)}
+          className="btn btn-primary"
+        >
           +
         </button>
         <button
@@ -29,11 +24,11 @@ class Product extends Component {
   getBadgeClasses() {
     let classes = "badge me-2 ";
     classes +=
-      this.state.quantity === 0 ? "bg-warning text-dark" : "bg-primary";
+      this.props.product.quantity === 0 ? "bg-warning text-dark" : "bg-primary";
     return classes;
   }
   formatQuantity() {
-    const { quantity } = this.state;
+    const { quantity } = this.props.product;
     return quantity === 0 ? "Zero" : quantity;
   }
 }
