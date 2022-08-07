@@ -2,51 +2,22 @@ import React, { Component } from "react";
 import Product from "./Product";
 
 class Products extends Component {
-  state = {
-    products: [
-      { id: 1, quantity: 0 },
-      { id: 2, quantity: 7 },
-      { id: 3, quantity: 2 },
-      { id: 4, quantity: 8 },
-    ],
-  };
-
-  handleIncrement = (product) => {
-    const products = [...this.state.products];
-    const index = products.indexOf(product);
-    products[index] = { ...product };
-    products[index].quantity++;
-    this.setState({ products });
-  };
-
-  handleDelete = (id) => {
-    const products = this.state.products.filter((p) => p.id !== id);
-    this.setState({ products });
-  };
-
-  handleReset = () => {
-    const products = this.state.products.map((product) => ({
-      ...product,
-      quantity: 0,
-    }));
-    this.setState({ products });
-  };
-
   render() {
+    const { onReset, onDelete, onIncrement, products } = this.props;
     return (
-      <>
-        <button onClick={this.handleReset} className="btn btn-primary">
+      <div className="container mt-4">
+        <button onClick={onReset} className="btn btn-primary">
           Reset
         </button>
-        {this.state.products.map((product) => (
+        {products.map((product) => (
           <Product
             key={product.id}
             product={product}
-            onDelete={this.handleDelete}
-            onIncrement={this.handleIncrement}
+            onDelete={onDelete}
+            onIncrement={onIncrement}
           />
         ))}
-      </>
+      </div>
     );
   }
 }
